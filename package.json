@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/MARYKKKK/construire-une-api/issues"
   },
-  "homepage": "https://github.com/MARYKKKK/construire-une-api#readme"
+  "homepage": "https://github.com/MARYKKKK/construire-une-api#readme",
+  "dependencies": {
+    "mongoose": "^6.8.1"
+  }
 }
