@@ -2,32 +2,33 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
 const multer = require ('../middelware/multer-config')
-const stuffCtrl = require('../controllers/stuff');
+const sauceCtrl = require('../controllers/sauce');
 
-
-router.get('/', auth, stuffCtrl.getAllStuff);
-router.post('/', auth, multer, stuffCtrl.createThing);
-router.get('/:id', auth, stuffCtrl.getOneThing);
-router.put('/:id', auth, multer, stuffCtrl.modifyThing);
-router.delete('/:id', auth, stuffCtrl.deleteThing);
-
+//CRUD avec les chemins et les droits
+router.get('/', auth, sauceCtrl.getAllSauce);
+router.post('/', auth, multer, sauceCtrl.creatSauce);
+router.get('/:id', auth, sauceCtrl.getOneSauce);
+router.put('/:id', auth, multer, sauceCtrl.modifySauce);
+router.delete('/:id', auth, sauceCtrl.deleteSauce);
+router.get ('/',auth,sauceCtrl.getAllSauce);
+router.post('/:id/like', auth, sauceCtrl.creatlike);
 
 
 
 
 
 router.post('/', (req, res, next) => {
-  const thing = new Thing({
+  const sauce = new sauce({
     title: req.body.title,
     description: req.body.description,
     imageUrl: req.body.imageUrl,
     price: req.body.price,
     userId: req.body.userId
   });
-  thing.save().then(
+  sauce.save().then(
     () => {
       res.status(201).json({
-        message: 'Post saved successfully!'
+        message: 'créé avec succés!'
       });
     }
   ).catch(
@@ -40,11 +41,11 @@ router.post('/', (req, res, next) => {
 });
 
 router.get('/:id', (req, res, next) => {
-  Thing.findOne({
+  sauce.findOne({
     _id: req.params.id
   }).then(
-    (thing) => {
-      res.status(200).json(thing);
+    (sauce) => {
+      res.status(200).json(sauce);
     }
   ).catch(
     (error) => {
@@ -56,7 +57,7 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.put('/:id', (req, res, next) => {
-  const thing = new Thing({
+  const sauce = new sauce({
     _id: req.params.id,
     title: req.body.title,
     description: req.body.description,
@@ -64,10 +65,10 @@ router.put('/:id', (req, res, next) => {
     price: req.body.price,
     userId: req.body.userId
   });
-  Thing.updateOne({_id: req.params.id}, thing).then(
+  sauce.updateOne({_id: req.params.id}, sauce).then(
     () => {
       res.status(201).json({
-        message: 'Thing updated successfully!'
+        message: ' sauce mise a jour avec succés!'
       });
     }
   ).catch(
@@ -80,10 +81,10 @@ router.put('/:id', (req, res, next) => {
 });
 
 router.delete('/:id', (req, res, next) => {
-  Thing.deleteOne({_id: req.params.id}).then(
+  sauce.deleteOne({_id: req.params.id}).then(
     () => {
       res.status(200).json({
-        message: 'Deleted!'
+        message: 'supprimé!'
       });
     }
   ).catch(
@@ -97,9 +98,32 @@ router.delete('/:id', (req, res, next) => {
 
 router.get('/' +
   '', (req, res, next) => {
-  Thing.find().then(
-    (things) => {
-      res.status(200).json(things);
+  sauce.find().then(
+    (sauce) => {
+      res.status(200).json(sauce);
+    }
+  ).catch(
+    (error) => {
+      res.status(400).json({
+        error: error
+      });
+    }
+  );
+});
+
+router.post('/:id/like', (req, res, next) => {
+  const like = new like({
+    title: req.body.title,
+    description: req.body.description,
+    imageUrl: req.body.imageUrl,
+    price: req.body.price,
+    userId: req.body.userId
+  });
+  like.save().then(
+    () => {
+      res.status(201).json({
+        message: 'ajout avec succés!'
+      });
     }
   ).catch(
     (error) => {

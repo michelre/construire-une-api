@@ -6,7 +6,7 @@ const  MYME_TYPES = {
     'image/jpeg': 'jpeg',
     'image/png':'png'
 };
-//objet de configuration  et on va l'appeler diskstorage = enregistrement sur le disque 
+//objet de configuration  et on va l'appeler disk storage = enregistrement sur le disque 
 const storage = multer.diskStorage({
     destination: (req, File, callback) =>{
         //pas d'erreur et nom du dossier
@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
     },
     //filname evite les même nom
     filname: (req, file, callback) =>{
-        //nouveau nom split: autour des espace et join utilise les inderscore
+        //nouveau nom split: autour des espace et join utilise les underscores
         const name = file.originalname.split (' ').join('_');
         //genere les extentions (qui sont un objets)
         const extention = MYNE_TYPES [file.minetypes];

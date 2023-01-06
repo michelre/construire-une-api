@@ -1,6 +1,6 @@
 const bcrypt = require ('bcrypt');
-
-const User = require ('..models/User');
+const jwt = require('jsonwebtoken');
+const User = require ('../models/User');
 
 // on déclare une fonction signup pour enregistrer nos utilisateurs
 exports.signup = (req, res, next) => {
