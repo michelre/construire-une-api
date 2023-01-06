@@ -5,7 +5,7 @@ const app = express()
 //importation du package body-parser
 const bodyParser = require('body-parser');
 //importe la route user.js
-const userRoutes = require('./route/user');
+const userRoute = require('./route/user');
 /*importation du package mongoose système de base de données
  non relationnelle open source et gratuit*/
  const mongoose = require('mongoose')
@@ -73,7 +73,7 @@ app.use('/api/sauce', (req, res, next) => {
   res.status(200).json(sauce);
 });
 
-app.post('/api/sauce', (req, res, next) => {
+/*app.post('/api/sauce', (req, res, next) => {
   delete req.body._id;
   const sauce = new sauce({
     ...req.body
@@ -95,7 +95,7 @@ app.get('/api/sauce', (req, res, next) => {
   sauce.find()
     .then(sauce => res.status(200).json(sauce))
     .catch(error => res.status(400).json({ error }));
-});
+});*/
 
 app.listen(port, () => console.log(`Notre application Node est démarrée sur : http://localhost:${port}`))
 
@@ -107,10 +107,10 @@ mongoose.connect("mongodb+srv://maryuser33:HmUAMxsv9YPI7SVZ@cluster0.ht52jvv.mon
    
 
   
-  const sauceRoutes = require('./routes/sauce');
+  const sauceRoute = require('./route/sauce');
   app.use (bodyParser.json())
-  app.use('/api/sauce', sauceRoutes);
-  app.use('/api/auth',userRoutes);
+  app.use('/api/sauce', sauceRoute);
+  app.use('/api/auth', userRoute);
   app.use('/images',express.static(path.join(__dirname, 'images')))
 
 

@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
-const multer = require ('../middelware/multer-config')
-const sauceCtrl = require('../controllers/sauce');
+const multer = require ('../middleware/multer-config')
+const sauceCtrl = require('../controleurs/sauce');
 
 //CRUD avec les chemins et les droits
 router.get('/', auth, sauceCtrl.getAllSauce);
@@ -22,8 +22,7 @@ router.post('/', (req, res, next) => {
     title: req.body.title,
     description: req.body.description,
     imageUrl: req.body.imageUrl,
-    price: req.body.price,
-    userId: req.body.userId
+    heat: req.body.heat
   });
   sauce.save().then(
     () => {
@@ -62,8 +61,7 @@ router.put('/:id', (req, res, next) => {
     title: req.body.title,
     description: req.body.description,
     imageUrl: req.body.imageUrl,
-    price: req.body.price,
-    userId: req.body.userId
+    heat: req.body.heat
   });
   sauce.updateOne({_id: req.params.id}, sauce).then(
     () => {
@@ -116,8 +114,7 @@ router.post('/:id/like', (req, res, next) => {
     title: req.body.title,
     description: req.body.description,
     imageUrl: req.body.imageUrl,
-    price: req.body.price,
-    userId: req.body.userId
+    heat: req.body.heat
   });
   like.save().then(
     () => {

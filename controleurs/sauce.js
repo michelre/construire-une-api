@@ -53,13 +53,13 @@ exports.modifysauce = (req, res, next) => {
 
  exports.deleteSauce = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id})
-        .then(thing => {
+        .then(sauce => {
             if (sauce.userId != req.auth.userId) {
-                res.status(401).json({message: 'Not authorized'});
+                res.status(401).json({message: 'non autorisé'});
             } else {
-                const filename = thing.imageUrl.split('/images/')[1];//suppression des images avec split
+                const filename = sauce.imageUrl.split('/images/')[1];//suppression des images avec split
                 fs.unlink(`images/${filename}`, () => {//suppression du fichier avec unlink
-                    Thing.deleteOne({_id: req.params.id})
+                    sauce.deleteOne({_id: req.params.id})
                         .then(() => { res.status(200).json({message: 'Objet supprimé !'})})
                         .catch(error => res.status(401).json({ error }));
                 });
