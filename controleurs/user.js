@@ -22,9 +22,7 @@ bcrypt.hash(req.body.password ,10)
 .catch(error => res.status(500).json({error}));
 };
 //on déclare une fonction login pour connecter nos utilisateurs
-exports.login = (req, res, next) => {
 
-};
 
 
 
@@ -32,14 +30,16 @@ exports.login = (req, res, next) => {
 
 
 //importation du package token créé et modifie les tokens
-const jwt = require('jsonwebtoken');
+
 /*on utilise la methose findOne et on lui passe un filtre(email)
 et la valeur transmise par le client*/
 exports.login = (req, res, next) => {
+    console.log(req.body.email)
     User.findOne({ email: req.body.email })
     //geré 2 cas (car c'est une prommesse géré par findOne) (then)quand elle reussi
         .then(user => {
             //if(user === nul)
+            console.log(user)
             if (!user) {
                 return res.status(401).json({ error: 'Utilisateur non trouvé !' });
             }

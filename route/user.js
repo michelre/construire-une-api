@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 //associer les fonctions aux différentes routes
-const userCtrl = require('../controllers/user');
+const userCtrl = require('../controleurs/user');
 //frontend envoie des information adresse mail et mot de pass
 router.post('/signup', userCtrl.signup);
 router.post('/login', userCtrl.login);

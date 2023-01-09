@@ -6,18 +6,18 @@ const sauceCtrl = require('../controleurs/sauce');
 
 //CRUD avec les chemins et les droits
 router.get('/', auth, sauceCtrl.getAllSauce);
-router.post('/', auth, multer, sauceCtrl.creatSauce);
+router.post('/', auth, multer, sauceCtrl.createSauce);
 router.get('/:id', auth, sauceCtrl.getOneSauce);
 router.put('/:id', auth, multer, sauceCtrl.modifySauce);
 router.delete('/:id', auth, sauceCtrl.deleteSauce);
-router.get ('/',auth,sauceCtrl.getAllSauce);
-router.post('/:id/like', auth, sauceCtrl.creatlike);
+
+//router.post('/:id/like', auth, sauceCtrl.creatlike);
 
 
 
 
 
-router.post('/', (req, res, next) => {
+/*router.post('/', (req, res, next) => {
   const sauce = new sauce({
     title: req.body.title,
     description: req.body.description,
@@ -129,6 +129,6 @@ router.post('/:id/like', (req, res, next) => {
       });
     }
   );
-});
+});*/
 
 module.exports = router;

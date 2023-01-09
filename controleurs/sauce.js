@@ -3,7 +3,7 @@ const fs = require ('fs');
 const { error } = require('console');
 
 // appel avec requette,result,et nextpour passer au middelware d'apres
-exports.getAllsauce = (req,res,next) => {
+exports.getAllSauce = (req,res,next) => {
     sauce.find()//demande a la base de donné avec find
     .then((sauce) =>{//si ok avec find
         res.status (200).json(sauce);
@@ -29,7 +29,7 @@ sauce.save()
 };
 
 
-exports.modifysauce = (req, res, next) => {
+exports.modifySauce = (req, res, next) => {
     const sauceObject = req.file ? {
         ...JSON.parse(req.body.sauce),
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
@@ -72,7 +72,7 @@ exports.modifysauce = (req, res, next) => {
 
 
 
- exports.getOne =(req, res, next) =>{
+ exports.getOneSauce =(req, res, next) =>{
     Sauce.findById(req.params.id).then((sauces) => {
         res.status(200).json(sauces)
     }).catch(err => {
@@ -80,7 +80,7 @@ exports.modifysauce = (req, res, next) => {
     })
 };
 
-
+/*
 exports.createLike = (req , res) => {
     //requperation d'une seule sauce avec 'findone'
     Sauce.findOne({
@@ -120,4 +120,4 @@ if(req.body.like == 0){
 res.status,(200).json({message:'like pris en compte'})
 .catch(error =>{
     res.status(500).json({error})
-});
+});*/
